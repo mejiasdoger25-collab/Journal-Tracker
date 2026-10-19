@@ -25,3 +25,4 @@ public class Organizador {
     @OneToMany
     private Taller taller;
 }
+
