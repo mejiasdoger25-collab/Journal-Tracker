@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Table(name = "taller")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,5 +28,5 @@ public class Taller {
     private Organizador organizador;
 
     @ManyToMany
-    private Participante participante;
+    private List<Participante> participante;
 }

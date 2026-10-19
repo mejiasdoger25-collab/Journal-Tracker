@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Table(name = "participant")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +22,7 @@ public class Participante {
 
     private String nombreCompleto;
 
-    @ManyToMany
-    private Taller taller;
+    @ManyToMany(mappedBy = "participantes")
+    private List<Taller> taller;
     
 }

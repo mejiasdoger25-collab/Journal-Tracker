@@ -1,15 +1,15 @@
 package com.salesianos.dam.journaltracker.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
+@Table(name = "organizador")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +22,6 @@ public class Organizador {
     private String nombre;
     private String email;
 
-    @OneToMany
-    private Taller taller;
-}
+    @OneToMany(mappedBy = "organizador")
+    private List<Taller> talleres;}
 
