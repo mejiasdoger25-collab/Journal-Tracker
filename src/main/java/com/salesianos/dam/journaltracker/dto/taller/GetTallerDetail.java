@@ -13,7 +13,7 @@ public record GetTallerDetail(
         LocalDateTime fechaHoraInicio,
         LocalDateTime fechaHoraFin,
         Organizador organizador,
-        List<Participante> participante
+        List<Participante> participantes
 ) {
     public static GetTallerDetail of (Taller t){
         return new GetTallerDetail(
@@ -22,7 +22,7 @@ public record GetTallerDetail(
                 t.getFechaHoraInicio(),
                 t.getFechaHoraFin(),
                 t.getOrganizador(),
-                t.getParticipante()
+                t.getParticipantes()
         );
     }
 }

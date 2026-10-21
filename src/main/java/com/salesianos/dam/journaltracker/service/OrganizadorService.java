@@ -1,6 +1,7 @@
 package com.salesianos.dam.journaltracker.service;
 
 import com.salesianos.dam.journaltracker.dto.organizador.EditOrganizadorDto;
+import com.salesianos.dam.journaltracker.error.notfound.OrganizadorNotFoundException;
 import com.salesianos.dam.journaltracker.model.Organizador;
 import com.salesianos.dam.journaltracker.repository.OrganizadorRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,29 +17,26 @@ public class OrganizadorService {
 
     public List<Organizador> getAllOrganizadores (){
         List<Organizador> result = organizadorRepository.findAll();
-        /*if (result.isEmpty()) {
+        if (result.isEmpty()) {
             throw new OrganizadorNotFoundException();
-        } para el siguiente bloque de excepciones*/
+        }
         return result;
-
-        /*forma más limpia para no usar exception:return organizadorRepository.findAll();*/
     }
 
     public Organizador getOrganizadorById (Long id) {
         return organizadorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Organizador no encontrado con id: " + id));
-        //cambiar la excepción general por creada propia
+                .orElseThrow(() -> new OrganizadorNotFoundException(id));
     }
 
-    public List<Organizador> getOrganizadorByTaller(Long id){
+    /*public List<Organizador> getOrganizadorByTaller(Long id){
         List<Organizador> result = organizadorRepository.findByTallerId(id);
         return result;
-        /*
-        * if (result.isEmpty()) {
+
+        if (result.isEmpty()) {
             throw new OrganizadorNotFoundException("Organizador not found with taller id " + id);
         }
-        * */
-    }
+        cambiado pues el method ha sido movido del repo al service tras ser creado
+    }*/
 
     public Organizador addOrganizador(EditOrganizadorDto editOrganizadorDto){
         //add validation w/ 1annotations or 2method (1>2)
@@ -57,10 +55,7 @@ public class OrganizadorService {
                     o.setEmail(editOrganizadorDto.email());
                     o.setTalleres(editOrganizadorDto.talleres());
                     return organizadorRepository.save(o);
-                }).orElseThrow(RuntimeException::new);
-
-        //.orElseThrow(() -> new OrganizadorNotFoundException(id));
-
+                }).orElseThrow(() -> new OrganizadorNotFoundException(id));
     }
 
 

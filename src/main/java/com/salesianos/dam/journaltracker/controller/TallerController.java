@@ -1,11 +1,13 @@
 package com.salesianos.dam.journaltracker.controller;
 
+import com.salesianos.dam.journaltracker.dto.organizador.GetOrganizadorDetail;
 import com.salesianos.dam.journaltracker.dto.taller.EditTallerDto;
 import com.salesianos.dam.journaltracker.dto.taller.GetTallerDetail;
 import com.salesianos.dam.journaltracker.dto.taller.GetTallerList;
 import com.salesianos.dam.journaltracker.model.Taller;
 import com.salesianos.dam.journaltracker.repository.TallerRepository;
 import com.salesianos.dam.journaltracker.service.TallerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +50,11 @@ public class TallerController {
         );
     }
 
+    @GetMapping("/{id}/organizador")
+    public ResponseEntity<GetOrganizadorDetail> getOrganizadorDeTaller(@PathVariable Long id) {
+        return ResponseEntity.ok(GetOrganizadorDetail.of(tallerService.getOrganizadorDeTaller(id)));
+    }
+
     @GetMapping("/participante/{id}")
     public ResponseEntity<List<GetTallerList>> getTallerByParticipante(@PathVariable Long id){
         List<Taller> result = tallerService.getTallerbyParticipante(id);
@@ -60,14 +67,14 @@ public class TallerController {
     }
 
     @PostMapping
-    public ResponseEntity<GetTallerDetail> addTaller (@RequestBody EditTallerDto editTallerDto){
+    public ResponseEntity<GetTallerDetail> addTaller (@Valid @RequestBody EditTallerDto editTallerDto){
         return ResponseEntity.status(201).body(
                 GetTallerDetail.of(tallerService.addTaller(editTallerDto))
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GetTallerDetail> updateTaller(@PathVariable Long id, @RequestBody EditTallerDto editTallerDto){
+    public ResponseEntity<GetTallerDetail> updateTaller(@PathVariable Long id, @Valid @RequestBody EditTallerDto editTallerDto){
         return ResponseEntity.ok(
                 GetTallerDetail.of(tallerService.updateTaller(id, editTallerDto))
         );

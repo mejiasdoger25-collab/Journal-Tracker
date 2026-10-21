@@ -8,5 +8,5 @@ import java.util.List;
 public interface OrganizadorRepository
     extends JpaRepository<Organizador, Long> {
 
-    List<Organizador> findByTallerId(Long id);
+    //List<Organizador> findByTallerId(Long id); -> cambiado al service
 }

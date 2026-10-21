@@ -9,5 +9,10 @@ public interface TallerRepository
         extends JpaRepository<Taller, Long> {
 
     List<Taller> findByOrganizadorId(Long id);
-    List<Taller> findByParticipanteId(Long id);
+    List<Taller> findByParticipantesId(Long id);
+
+
+    //para implementar la exception personalizada YallerYaExistenteException
+    boolean existsByTituloIgnoreCase(String titulo);
+    boolean existsByTituloIgnoreCaseAndIdNot(String titulo, Long id);
 }
