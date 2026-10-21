@@ -10,4 +10,9 @@ public interface TallerRepository
 
     List<Taller> findByOrganizadorId(Long id);
     List<Taller> findByParticipantesId(Long id);
+
+
+    //para implementar la exception personalizada YallerYaExistenteException
+    boolean existsByTituloIgnoreCase(String titulo);
+    boolean existsByTituloIgnoreCaseAndIdNot(String titulo, Long id);
 }

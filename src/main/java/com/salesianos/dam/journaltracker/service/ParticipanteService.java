@@ -1,6 +1,7 @@
 package com.salesianos.dam.journaltracker.service;
 
 import com.salesianos.dam.journaltracker.dto.participante.EditParticipante;
+import com.salesianos.dam.journaltracker.error.notfound.ParticipanteNotFoundException;
 import com.salesianos.dam.journaltracker.model.Participante;
 import com.salesianos.dam.journaltracker.repository.ParticipanteRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,7 @@ public class ParticipanteService {
 
     public Participante getParticipanteById (Long id){
         return participanteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Particpante no encontrado con id: " + id));
-        //cambiar la excepción general por creada propia
-
+                .orElseThrow(() -> new ParticipanteNotFoundException(id));
     }
 
     public Participante addParticipante (EditParticipante editParticipante){

@@ -1,6 +1,6 @@
 package com.salesianos.dam.journaltracker.error.notfound;
 
-public class OrganizadorNotFoundException extends RuntimeException {
+public class OrganizadorNotFoundException extends EntityNotFoundException  {
 
     public OrganizadorNotFoundException() {
         super("Organizador no encontrado");

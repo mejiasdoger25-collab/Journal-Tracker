@@ -6,6 +6,7 @@ import com.salesianos.dam.journaltracker.dto.organizador.GetOrganizadorList;
 import com.salesianos.dam.journaltracker.model.Organizador;
 import com.salesianos.dam.journaltracker.repository.OrganizadorRepository;
 import com.salesianos.dam.journaltracker.service.OrganizadorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.utils.PropertyResolverUtils;
 import org.springframework.http.ResponseEntity;
@@ -52,14 +53,14 @@ public class OrganizadorController {
     */
 
     @PostMapping
-    public ResponseEntity<GetOrganizadorDetail> addOrganizador (@RequestBody EditOrganizadorDto editOrganizadorDto){
+    public ResponseEntity<GetOrganizadorDetail> addOrganizador (@Valid @RequestBody EditOrganizadorDto editOrganizadorDto){
         return ResponseEntity.status(201).body(
                 GetOrganizadorDetail.of(organizadorService.addOrganizador(editOrganizadorDto))
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GetOrganizadorDetail> updateOrganizador(@PathVariable Long id, @RequestBody EditOrganizadorDto editOrganizadorDto){
+    public ResponseEntity<GetOrganizadorDetail> updateOrganizador(@PathVariable Long id, @Valid @RequestBody EditOrganizadorDto editOrganizadorDto){
         return ResponseEntity.ok(
                 GetOrganizadorDetail.of(organizadorService.updateOrganizador(id, editOrganizadorDto)));
     }

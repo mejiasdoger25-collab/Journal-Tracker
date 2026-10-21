@@ -1,6 +1,6 @@
 package com.salesianos.dam.journaltracker.error.notfound;
 
-public class TallerNotFoundException extends RuntimeException {
+public class TallerNotFoundException extends EntityNotFoundException  {
 
     public TallerNotFoundException(){
         super("Taller no encontrado");
