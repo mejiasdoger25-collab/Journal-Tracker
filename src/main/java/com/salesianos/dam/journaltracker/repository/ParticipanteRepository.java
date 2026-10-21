@@ -3,7 +3,7 @@ package com.salesianos.dam.journaltracker.repository;
 import com.salesianos.dam.journaltracker.model.Participante;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ParticpanteRepository
+public interface ParticipanteRepository
         extends JpaRepository<Participante, Long> {
 
 

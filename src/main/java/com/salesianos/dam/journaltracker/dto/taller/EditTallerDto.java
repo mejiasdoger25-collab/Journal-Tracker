@@ -12,7 +12,7 @@ public record EditTallerDto(
         LocalDateTime fechaHoraInicio,
         LocalDateTime fechaHoraFin,
         Organizador organizador,
-        List<Participante> participante
+        List<Participante> participantes
 ) {
     public Taller to(){
         return Taller.builder()
@@ -20,7 +20,7 @@ public record EditTallerDto(
                 .fechaHoraInicio(fechaHoraInicio)
                 .fechaHoraFin(fechaHoraFin)
                 .organizador(organizador)
-                .participante(participante)
+                .participantes(participantes)
                 .build();
     }
 }

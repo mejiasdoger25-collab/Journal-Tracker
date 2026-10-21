@@ -1,5 +1,6 @@
 package com.salesianos.dam.journaltracker.controller;
 
+import com.salesianos.dam.journaltracker.dto.organizador.GetOrganizadorDetail;
 import com.salesianos.dam.journaltracker.dto.taller.EditTallerDto;
 import com.salesianos.dam.journaltracker.dto.taller.GetTallerDetail;
 import com.salesianos.dam.journaltracker.dto.taller.GetTallerList;
@@ -46,6 +47,11 @@ public class TallerController {
                         .map(GetTallerList::of)
                         .toList()
         );
+    }
+
+    @GetMapping("/{id}/organizador")
+    public ResponseEntity<GetOrganizadorDetail> getOrganizadorDeTaller(@PathVariable Long id) {
+        return ResponseEntity.ok(GetOrganizadorDetail.of(tallerService.getOrganizadorDeTaller(id)));
     }
 
     @GetMapping("/participante/{id}")

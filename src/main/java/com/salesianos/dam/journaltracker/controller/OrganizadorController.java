@@ -38,6 +38,7 @@ public class OrganizadorController {
         return ResponseEntity.ok(GetOrganizadorDetail.of(organizadorService.getOrganizadorById(id)));
     }
 
+    /*
     @GetMapping("/taller/{id}")
     public ResponseEntity<List<GetOrganizadorList>> getOrganizadorByTaller(@PathVariable Long id){
         List<Organizador> result = organizadorService.getOrganizadorByTaller(id);
@@ -47,7 +48,8 @@ public class OrganizadorController {
                         .map(GetOrganizadorList::of)
                         .toList()
         );
-    }
+    } cambiado pues el method ha sido movido del repo al service tras ser creado
+    */
 
     @PostMapping
     public ResponseEntity<GetOrganizadorDetail> addOrganizador (@RequestBody EditOrganizadorDto editOrganizadorDto){

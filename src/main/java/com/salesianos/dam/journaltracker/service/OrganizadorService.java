@@ -30,15 +30,15 @@ public class OrganizadorService {
         //cambiar la excepción general por creada propia
     }
 
-    public List<Organizador> getOrganizadorByTaller(Long id){
+    /*public List<Organizador> getOrganizadorByTaller(Long id){
         List<Organizador> result = organizadorRepository.findByTallerId(id);
         return result;
-        /*
-        * if (result.isEmpty()) {
+
+        if (result.isEmpty()) {
             throw new OrganizadorNotFoundException("Organizador not found with taller id " + id);
         }
-        * */
-    }
+        cambiado pues el method ha sido movido del repo al service tras ser creado
+    }*/
 
     public Organizador addOrganizador(EditOrganizadorDto editOrganizadorDto){
         //add validation w/ 1annotations or 2method (1>2)

@@ -3,7 +3,7 @@ package com.salesianos.dam.journaltracker.controller;
 import com.salesianos.dam.journaltracker.dto.participante.EditParticipante;
 import com.salesianos.dam.journaltracker.dto.participante.GetParticipanteList;
 import com.salesianos.dam.journaltracker.model.Participante;
-import com.salesianos.dam.journaltracker.repository.ParticpanteRepository;
+import com.salesianos.dam.journaltracker.repository.ParticipanteRepository;
 import com.salesianos.dam.journaltracker.service.ParticipanteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class ParticipanteController {
 
     //controller incompleto(básico) pues el enunciado lo define así
 
-    private final ParticpanteRepository particpanteRepository;
+    private final ParticipanteRepository participanteRepository;
     private final ParticipanteService participanteService;
 
     @GetMapping

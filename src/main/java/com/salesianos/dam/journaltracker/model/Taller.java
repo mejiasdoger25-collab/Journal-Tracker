@@ -28,5 +28,5 @@ public class Taller {
     private Organizador organizador;
 
     @ManyToMany
-    private List<Participante> participante;
+    private List<Participante> participantes;
 }

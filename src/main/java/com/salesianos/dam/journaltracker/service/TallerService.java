@@ -1,6 +1,7 @@
 package com.salesianos.dam.journaltracker.service;
 
 import com.salesianos.dam.journaltracker.dto.taller.EditTallerDto;
+import com.salesianos.dam.journaltracker.model.Organizador;
 import com.salesianos.dam.journaltracker.model.Taller;
 import com.salesianos.dam.journaltracker.repository.TallerRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class TallerService {
     }
 
     public List<Taller> getTallerbyParticipante(Long id){
-        List<Taller> result = tallerRepository.findByParticipanteId(id);
+        List<Taller> result = tallerRepository.findByParticipantesId(id);
         return result;
         /*
         * if (result.isEmpty()) {
@@ -63,7 +64,7 @@ public class TallerService {
                     t.setFechaHoraInicio(editTallerDto.fechaHoraInicio());
                     t.setFechaHoraFin(editTallerDto.fechaHoraFin());
                     t.setOrganizador(editTallerDto.organizador());
-                    t.setParticipante(editTallerDto.participante());
+                    t.setParticipantes(editTallerDto.participantes());
                     return tallerRepository.save(t);
                 }).orElseThrow(RuntimeException::new);
         //.orElseThrow(() -> new TallerNotFoundException(id));
@@ -76,4 +77,12 @@ public class TallerService {
     /*public void deleteTaller (Taller taller){
         tallerRepository.delete(taller);
     }*/
+
+
+    public Organizador getOrganizadorDeTaller(Long tallerId) {
+        return tallerRepository.findById(tallerId)
+                .orElseThrow(() -> new RuntimeException("Taller no encontrado"))
+                .getOrganizador();
+    }
+
 }
