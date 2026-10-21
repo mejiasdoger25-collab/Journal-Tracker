@@ -2,12 +2,10 @@ package com.salesianos.dam.journaltracker.service;
 
 import com.salesianos.dam.journaltracker.dto.organizador.EditOrganizadorDto;
 import com.salesianos.dam.journaltracker.model.Organizador;
-import com.salesianos.dam.journaltracker.model.Taller;
 import com.salesianos.dam.journaltracker.repository.OrganizadorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
