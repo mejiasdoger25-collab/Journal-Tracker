@@ -20,7 +20,6 @@ public class OrganizadorController {
 
     private final OrganizadorRepository organizadorRepository;
     private final OrganizadorService organizadorService;
-    private final PropertyResolverUtils propertyResolverUtils;
 
     @GetMapping
     public ResponseEntity<List<GetOrganizadorList>> getAllOrganizadores() {
