@@ -1,9 +1,11 @@
 package com.salesianos.dam.journaltracker.controller;
 
 import com.salesianos.dam.journaltracker.dto.organizador.GetOrganizadorDetail;
+import com.salesianos.dam.journaltracker.dto.participante.GetParticipanteList;
 import com.salesianos.dam.journaltracker.dto.taller.EditTallerDto;
 import com.salesianos.dam.journaltracker.dto.taller.GetTallerDetail;
 import com.salesianos.dam.journaltracker.dto.taller.GetTallerList;
+import com.salesianos.dam.journaltracker.model.Participante;
 import com.salesianos.dam.journaltracker.model.Taller;
 import com.salesianos.dam.journaltracker.repository.TallerRepository;
 import com.salesianos.dam.journaltracker.service.TallerService;
@@ -86,4 +88,28 @@ public class TallerController {
         return ResponseEntity.noContent().build();
     }
 
+
+    //para la inserción de participante
+    @PostMapping("/{tallerId}/participantes/{participanteId}")
+    public ResponseEntity<GetTallerDetail> inscribirParticipante(@PathVariable Long tallerId, @PathVariable Long participanteId) {
+        return ResponseEntity.status(201).body(
+                GetTallerDetail.of(tallerService.inscribirParticipante(tallerId, participanteId)));
+    }
+
+    @GetMapping("/{tallerId}/participantes")
+    public ResponseEntity<List<GetParticipanteList>> getParticipantesDeTaller(@PathVariable Long tallerId) {
+        List<Participante> result = tallerService.getParticipantesDeTaller(tallerId);
+        return ResponseEntity.ok(
+                result
+                        .stream()
+                        .map(GetParticipanteList::of)
+                        .toList()
+        );
+    }
+
+    @DeleteMapping("/{tallerId}/participantes/{participanteId}")
+    public ResponseEntity<Void> eliminarInscripcion(@PathVariable Long tallerId, @PathVariable Long participanteId) {
+        tallerService.eliminarInscripcion(tallerId, participanteId);
+        return ResponseEntity.noContent().build();
+    }
 }
