@@ -3,11 +3,13 @@ package com.salesianos.dam.journaltracker.service;
 import com.salesianos.dam.journaltracker.dto.taller.EditTallerDto;
 import com.salesianos.dam.journaltracker.error.ParticipanteYaInscritoException;
 import com.salesianos.dam.journaltracker.error.TallerYaExisteException;
+import com.salesianos.dam.journaltracker.error.notfound.OrganizadorNotFoundException;
 import com.salesianos.dam.journaltracker.error.notfound.ParticipanteNotFoundException;
 import com.salesianos.dam.journaltracker.error.notfound.TallerNotFoundException;
 import com.salesianos.dam.journaltracker.model.Organizador;
 import com.salesianos.dam.journaltracker.model.Participante;
 import com.salesianos.dam.journaltracker.model.Taller;
+import com.salesianos.dam.journaltracker.repository.OrganizadorRepository;
 import com.salesianos.dam.journaltracker.repository.ParticipanteRepository;
 import com.salesianos.dam.journaltracker.repository.TallerRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class TallerService {
 
     private final TallerRepository tallerRepository;
     private final ParticipanteRepository participanteRepository;
+    private final OrganizadorRepository organizadorRepository;
 
     public List<Taller> getAllTalleres (){
         List<Taller> result = tallerRepository.findAll();
@@ -57,12 +60,15 @@ public class TallerService {
         //add validation w/ 1annotations or 2method (1>2)
         //Taller t = editTallerDto.to();
         // cuidado con relaciones, implementar organizador y particpante (same as model class)
+        Organizador organizador = organizadorRepository.findById(editTallerDto.organizadorId())
+                .orElseThrow(() -> new OrganizadorNotFoundException(editTallerDto.organizadorId()));
 
         String titulo = editTallerDto.titulo().trim();
         if (tallerRepository.existsByTituloIgnoreCase(titulo)) {
             throw new TallerYaExisteException("Ya existe un taller con el título '" + titulo + "'");
         }
         Taller t = editTallerDto.to();
+        t.setOrganizador(organizador);
         t.setParticipantes(new ArrayList<>());
         return tallerRepository.save(t);
     }
@@ -72,13 +78,18 @@ public class TallerService {
 
         return tallerRepository.findById(id)
                 .map(t -> {
+
+                    Organizador organizador = organizadorRepository.findById(editTallerDto.organizadorId())
+                            .orElseThrow(() ->new OrganizadorNotFoundException(editTallerDto.organizadorId()));
+
                     if (tallerRepository.existsByTituloIgnoreCaseAndIdNot(titulo, id)) {
                         throw new TallerYaExisteException("Ya existe un taller con el título '" + titulo + "'");
                     }
+
                     t.setTitulo(titulo); //cambiado para usar el trimmed en lugar del default del dto
                     t.setFechaHoraInicio(editTallerDto.fechaHoraInicio());
                     t.setFechaHoraFin(editTallerDto.fechaHoraFin());
-                    t.setOrganizador(editTallerDto.organizador());
+                    t.setOrganizador(organizador);
                     t.setParticipantes(editTallerDto.participantes());
                     return tallerRepository.save(t);
                 }).orElseThrow(() -> new TallerNotFoundException(id));
