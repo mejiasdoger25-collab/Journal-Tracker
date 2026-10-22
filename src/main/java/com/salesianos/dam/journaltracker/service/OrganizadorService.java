@@ -2,8 +2,10 @@ package com.salesianos.dam.journaltracker.service;
 
 import com.salesianos.dam.journaltracker.dto.organizador.EditOrganizadorDto;
 import com.salesianos.dam.journaltracker.error.notfound.OrganizadorNotFoundException;
+import com.salesianos.dam.journaltracker.error.notfound.TallerNotFoundException;
 import com.salesianos.dam.journaltracker.model.Organizador;
 import com.salesianos.dam.journaltracker.repository.OrganizadorRepository;
+import com.salesianos.dam.journaltracker.repository.TallerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.List;
 public class OrganizadorService {
 
     private final OrganizadorRepository organizadorRepository;
+    private final TallerRepository tallerRepository;
 
     public List<Organizador> getAllOrganizadores (){
         List<Organizador> result = organizadorRepository.findAll();
@@ -60,6 +63,9 @@ public class OrganizadorService {
 
 
     public void deleteOrganizadorById (Long id){
+        if (!tallerRepository.existsById(id)) {
+            throw new TallerNotFoundException(id);
+        }
         organizadorRepository.deleteById(id);
     }
 

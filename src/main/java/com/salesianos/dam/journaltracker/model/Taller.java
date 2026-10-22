@@ -1,10 +1,7 @@
 package com.salesianos.dam.journaltracker.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "taller")
 @Data
+@EqualsAndHashCode(of = "id") //@data genera equals/hashCode con todos los campos(listas de relación incluidas). Al +de1, para comprobar o para delete, como están vinculadas las instancias, equals() entra en bucle -> StackOverflowError
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

@@ -50,7 +50,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ParticipanteNotFoundException.class)
-    public ProblemDetail handleTallerNotFound(ParticipanteNotFoundException ex) {
+    public ProblemDetail handleParticipanteNotFound(ParticipanteNotFoundException ex) {
 
         ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         problem.setTitle("Participante no encontrado");

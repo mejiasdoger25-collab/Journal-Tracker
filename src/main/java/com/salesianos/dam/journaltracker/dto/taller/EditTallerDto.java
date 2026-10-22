@@ -22,16 +22,15 @@ public record EditTallerDto(
         LocalDateTime fechaHoraFin,
 
         @NotNull(message = "{editTallerDto.organizador.notNull}")
-        Organizador organizador,
+        Long organizadorId,
 
         List<Participante> participantes
 ) {
-    public Taller to(){
+    public Taller to() {
         return Taller.builder()
                 .titulo(titulo)
                 .fechaHoraInicio(fechaHoraInicio)
                 .fechaHoraFin(fechaHoraFin)
-                .organizador(organizador)
                 .participantes(participantes)
                 .build();
     }
