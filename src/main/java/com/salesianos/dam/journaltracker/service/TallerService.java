@@ -1,13 +1,17 @@
 package com.salesianos.dam.journaltracker.service;
 
 import com.salesianos.dam.journaltracker.dto.taller.EditTallerDto;
+import com.salesianos.dam.journaltracker.error.ParticipanteYaInscritoException;
 import com.salesianos.dam.journaltracker.error.TallerYaExisteException;
 import com.salesianos.dam.journaltracker.error.notfound.TallerNotFoundException;
 import com.salesianos.dam.journaltracker.model.Organizador;
+import com.salesianos.dam.journaltracker.model.Participante;
 import com.salesianos.dam.journaltracker.model.Taller;
+import com.salesianos.dam.journaltracker.repository.ParticipanteRepository;
 import com.salesianos.dam.journaltracker.repository.TallerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+//import com.salesianos.dam.journaltracker.error.notfound.ParticipanteNotFoundException;
 
 import java.util.List;
 
@@ -16,6 +20,7 @@ import java.util.List;
 public class TallerService {
 
     private final TallerRepository tallerRepository;
+    private final ParticipanteRepository participanteRepository;
 
     public List<Taller> getAllTalleres (){
         List<Taller> result = tallerRepository.findAll();
@@ -91,4 +96,32 @@ public class TallerService {
                 .getOrganizador();
     }
 
+
+    //para implementar la excepción propia del taller ya existente
+    public Taller inscribirParticipante(Long tallerId, Long participanteId) {
+        Taller t = tallerRepository.findById(tallerId).orElseThrow(() -> new TallerNotFoundException(tallerId));
+        Participante p = participanteRepository.findById(participanteId).orElseThrow(() -> new RuntimeException("Error, participante con el id del taller proporcionado no encontrado"));
+        //new ParticipanteNotFoundException(participanteId));
+
+        if (t.getParticipantes().contains(p)) {
+            throw new ParticipanteYaInscritoException("El participante " + participanteId + " ya está inscrito en el taller " + tallerId);
+        }
+
+        t.getParticipantes().add(p);
+        return tallerRepository.save(t);
+    }
+
+    public List<Participante> getParticipantesDeTaller(Long tallerId) {
+        Taller t = tallerRepository.findById(tallerId).orElseThrow(() -> new TallerNotFoundException(tallerId));
+        return t.getParticipantes();
+    }
+
+    public void eliminarInscripcion(Long tallerId, Long participanteId) {
+        Taller t = tallerRepository.findById(tallerId).orElseThrow(() -> new TallerNotFoundException(tallerId));
+        Participante p = participanteRepository.findById(participanteId).orElseThrow(() -> new RuntimeException("Error, participante con el id del taller proporcionado no encontrado"));
+        //new ParticipanteNotFoundException(participanteId));
+
+        t.getParticipantes().remove(p);
+        tallerRepository.save(t);
+    }
 }
