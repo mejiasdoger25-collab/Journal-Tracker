@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Data-Base ###
+/db
+.mv
+/.mv
+/db/.mv
