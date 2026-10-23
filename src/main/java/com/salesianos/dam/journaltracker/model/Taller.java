@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,5 +27,5 @@ public class Taller {
     private Organizador organizador;
 
     @ManyToMany
-    private List<Participante> participantes;
+    private List<Participante> participantes = new ArrayList<>();
 }

@@ -50,8 +50,8 @@ public class OrganizadorService {
 
 
     public void deleteOrganizadorById (Long id){
-        if (!tallerRepository.existsById(id)) {
-            throw new TallerNotFoundException(id);
+        if (!organizadorRepository.existsById(id)) {
+            throw new OrganizadorNotFoundException(id);
         }
         organizadorRepository.deleteById(id);
     }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,5 +24,8 @@ public class Organizador {
 
     @OneToMany(mappedBy = "organizador")
     @JsonIgnore //le dice a Jackson que este campo no se incluya cuando se serializa un Organizador/Participante dentro de otra respuesta
-    private List<Taller> talleres;}
+    @Builder.Default
+    private List<Taller> talleres = new ArrayList<>();
+
+}
 

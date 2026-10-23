@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,6 @@ public class Participante {
 
     @ManyToMany(mappedBy = "participantes")
     @JsonIgnore //le dice a Jackson que este campo no se incluya cuando se serializa un Organizador/Participante dentro de otra respuesta
-    private List<Taller> taller;
+    private List<Taller> taller = new ArrayList<>();
     
 }
