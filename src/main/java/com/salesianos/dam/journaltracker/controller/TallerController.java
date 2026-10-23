@@ -7,7 +7,6 @@ import com.salesianos.dam.journaltracker.dto.taller.GetTallerDetail;
 import com.salesianos.dam.journaltracker.dto.taller.GetTallerList;
 import com.salesianos.dam.journaltracker.model.Participante;
 import com.salesianos.dam.journaltracker.model.Taller;
-import com.salesianos.dam.journaltracker.repository.TallerRepository;
 import com.salesianos.dam.journaltracker.service.TallerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -31,7 +30,6 @@ import java.util.List;
 @Tag(name = "Taller Controller", description = "CRUD de talleres y gestión de las inscripciones de participantes")
 public class TallerController {
 
-    private final TallerRepository tallerRepository;
     private final TallerService tallerService;
 
     @Operation(summary = "Obtener todos los talleres",
@@ -237,7 +235,6 @@ public class TallerController {
                                     }
                                     """)))
     })
-    //para la inserción de participante
     @PostMapping("/{tallerId}/participantes/{participanteId}")
     public ResponseEntity<GetTallerDetail> inscribirParticipante(@PathVariable Long tallerId, @PathVariable Long participanteId) {
         return ResponseEntity.status(201).body(
@@ -283,5 +280,4 @@ public class TallerController {
         return ResponseEntity.noContent().build();
     }
 
-//http://localhost:8080/swagger-ui/index.html
 }

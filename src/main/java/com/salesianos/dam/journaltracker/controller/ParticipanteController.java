@@ -3,7 +3,6 @@ package com.salesianos.dam.journaltracker.controller;
 import com.salesianos.dam.journaltracker.dto.participante.EditParticipante;
 import com.salesianos.dam.journaltracker.dto.participante.GetParticipanteList;
 import com.salesianos.dam.journaltracker.model.Participante;
-import com.salesianos.dam.journaltracker.repository.ParticipanteRepository;
 import com.salesianos.dam.journaltracker.service.ParticipanteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -21,15 +20,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Controller básico
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/participante")
 @Tag(name = "Participante Controller", description = "CRUD básico de participantes (crear y listar), según el enunciado")
 public class ParticipanteController {
 
-    //controller incompleto(básico) pues el enunciado lo define así
-
-    private final ParticipanteRepository participanteRepository;
     private final ParticipanteService participanteService;
 
     @Operation(summary = "Obtener todos los participantes",
@@ -83,5 +80,4 @@ public class ParticipanteController {
         );
     }
 
-//http://localhost:8080/swagger-ui/index.html
 }

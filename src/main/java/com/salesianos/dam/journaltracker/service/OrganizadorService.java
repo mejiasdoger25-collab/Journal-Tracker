@@ -31,22 +31,9 @@ public class OrganizadorService {
                 .orElseThrow(() -> new OrganizadorNotFoundException(id));
     }
 
-    /*public List<Organizador> getOrganizadorByTaller(Long id){
-        List<Organizador> result = organizadorRepository.findByTallerId(id);
-        return result;
-
-        if (result.isEmpty()) {
-            throw new OrganizadorNotFoundException("Organizador not found with taller id " + id);
-        }
-        cambiado pues el method ha sido movido del repo al service tras ser creado
-    }*/
 
     public Organizador addOrganizador(EditOrganizadorDto editOrganizadorDto){
-        //add validation w/ 1annotations or 2method (1>2)
         Organizador o = editOrganizadorDto.to();
-
-        //Taller t = tallerRepository.findById(id).map(t -> { // add cosas dto when is created})
-
         return organizadorRepository.save(o);
     }
 
@@ -68,21 +55,5 @@ public class OrganizadorService {
         }
         organizadorRepository.deleteById(id);
     }
-
-    /*public void deleteOrganizador (Organizador organizador){
-        organizadorRepository.delete(organizador);
-    }*/
-
-    //Implementar con los dtos, posteriormente pasar a anotaciones; private void validateOrganizador(OrganizadorDto editOrganizador){}
-
-
-
-
-
-
-
-
-
-
 
 }

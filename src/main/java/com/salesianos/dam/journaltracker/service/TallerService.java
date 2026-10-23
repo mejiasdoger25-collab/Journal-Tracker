@@ -57,9 +57,6 @@ public class TallerService {
     }
 
     public Taller addTaller (EditTallerDto editTallerDto){
-        //add validation w/ 1annotations or 2method (1>2)
-        //Taller t = editTallerDto.to();
-        // cuidado con relaciones, implementar organizador y particpante (same as model class)
         Organizador organizador = organizadorRepository.findById(editTallerDto.organizadorId())
                 .orElseThrow(() -> new OrganizadorNotFoundException(editTallerDto.organizadorId()));
 
@@ -102,10 +99,6 @@ public class TallerService {
         tallerRepository.deleteById(id);
     }
 
-    /*public void deleteTaller (Taller taller){
-        tallerRepository.delete(taller);
-    }*/
-
 
     public Organizador getOrganizadorDeTaller(Long tallerId) {
         return tallerRepository.findById(tallerId)
@@ -114,11 +107,9 @@ public class TallerService {
     }
 
 
-    //para implementar la excepción propia del taller ya existente
     public Taller inscribirParticipante(Long tallerId, Long participanteId) {
         Taller t = tallerRepository.findById(tallerId).orElseThrow(() -> new TallerNotFoundException(tallerId));
         Participante p = participanteRepository.findById(participanteId).orElseThrow(() -> new ParticipanteNotFoundException(participanteId));
-        //new ParticipanteNotFoundException(participanteId));
 
         if (t.getParticipantes().contains(p)) {
             throw new ParticipanteYaInscritoException("El participante " + participanteId + " ya está inscrito en el taller " + tallerId);
