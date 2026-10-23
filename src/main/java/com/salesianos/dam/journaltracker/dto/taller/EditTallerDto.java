@@ -1,6 +1,5 @@
 package com.salesianos.dam.journaltracker.dto.taller;
 
-import com.salesianos.dam.journaltracker.model.Organizador;
 import com.salesianos.dam.journaltracker.model.Participante;
 import com.salesianos.dam.journaltracker.model.Taller;
 import com.salesianos.dam.journaltracker.validation.FechaFinPosterior;

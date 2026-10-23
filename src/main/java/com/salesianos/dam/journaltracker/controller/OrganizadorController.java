@@ -4,7 +4,6 @@ import com.salesianos.dam.journaltracker.dto.organizador.EditOrganizadorDto;
 import com.salesianos.dam.journaltracker.dto.organizador.GetOrganizadorDetail;
 import com.salesianos.dam.journaltracker.dto.organizador.GetOrganizadorList;
 import com.salesianos.dam.journaltracker.model.Organizador;
-import com.salesianos.dam.journaltracker.repository.OrganizadorRepository;
 import com.salesianos.dam.journaltracker.service.OrganizadorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -16,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.utils.PropertyResolverUtils;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +27,6 @@ import java.util.List;
 @Tag(name = "Organizador Controller", description = "Gestión de los organizadores de talleres culturales")
 public class OrganizadorController {
 
-    private final OrganizadorRepository organizadorRepository;
     private final OrganizadorService organizadorService;
 
     @Operation(
@@ -173,19 +170,6 @@ public class OrganizadorController {
         return ResponseEntity.ok(GetOrganizadorDetail.of(organizadorService.getOrganizadorById(id)));
     }
 
-    /*
-    @GetMapping("/taller/{id}")
-    public ResponseEntity<List<GetOrganizadorList>> getOrganizadorByTaller(@PathVariable Long id){
-        List<Organizador> result = organizadorService.getOrganizadorByTaller(id);
-        return ResponseEntity.ok(
-                result
-                        .stream()
-                        .map(GetOrganizadorList::of)
-                        .toList()
-        );
-    } cambiado pues el method ha sido movido del repo al service tras ser creado
-    */
-
     @Operation(
             summary = "Crear un organizador",
             description = "Da de alta un nuevo organizador. Nombre y email son obligatorios"
@@ -294,5 +278,5 @@ public class OrganizadorController {
         return ResponseEntity.noContent().build();
     }
 
-//http://localhost:8080/swagger-ui/index.html
+    // Swagger UI: http://localhost:8080/swagger-ui/index.html
 }

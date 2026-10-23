@@ -3,7 +3,6 @@ package com.salesianos.dam.journaltracker.error;
 import com.salesianos.dam.journaltracker.error.notfound.OrganizadorNotFoundException;
 import com.salesianos.dam.journaltracker.error.notfound.ParticipanteNotFoundException;
 import com.salesianos.dam.journaltracker.error.notfound.TallerNotFoundException;
-//import jakarta.persistence.EntityNotFoundException;
 import com.salesianos.dam.journaltracker.error.notfound.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
